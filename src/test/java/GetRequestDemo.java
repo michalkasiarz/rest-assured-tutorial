@@ -17,6 +17,7 @@ public class GetRequestDemo {
                 .param("units", "imperial")
                 .param("origins", "Washington,DC")
                 .param("destinations", "New+York+City,NY")
+                // provide an API key below
                 .param("key", "")
         .when()
                 .get("/distancematrix/json")
