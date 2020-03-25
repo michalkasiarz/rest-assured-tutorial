@@ -1,3 +1,5 @@
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import io.restassured.RestAssured;
@@ -7,21 +9,27 @@ public class GetRequestDemo {
 
     @BeforeClass
     public void setup() {
-        RestAssured.baseURI = "https://maps.googleapis.com";
-        RestAssured.basePath = "/maps/api/";
+        RestAssured.baseURI = "https://reqres.in";
+        RestAssured.basePath = "/api/users";
     }
 
     @Test
     public void statusCodeVerification() {
         given()
-                .param("units", "imperial")
-                .param("origins", "Washington,DC")
-                .param("destinations", "New+York+City,NY")
-                // provide an API key below
-                .param("key", "")
+
         .when()
-                .get("/distancematrix/json")
+                .param("page", 2)
         .then()
                 .statusCode(200);
     }
+
+    @Test
+    public void getResponseBody() {
+
+        RequestSpecification httpRequest = RestAssured.given();
+        Response response = httpRequest.get();
+        System.out.println(response.prettyPrint());
+
+    }
+
 }
